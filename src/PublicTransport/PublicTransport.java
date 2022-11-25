@@ -1,29 +1,21 @@
 package PublicTransport;
 
-public class PublicTransport {
+public abstract class PublicTransport {
+    protected String status ="";
     protected int vehicleNumber;
     protected int fuel = 100;
     protected int speed = 0;
     protected int currentOfPassengers=0;
-    protected int maxPassengers;
+    protected int maxPassengers; //필요한가 고민중.. 자식 클래스에 들어가지만 자식클래스에서 재정의를 해줘야한다. 이 클래스에서 안쓰인다.
     protected int remainingPassengers;
 
-
-
-
-
-
+    //운행 시작
+    abstract void start();
+    //운행 종료
+    abstract void end();
     //승객 탑승
-    public boolean takePassenger(int passengers) { //추상메서드로 전환
-        if(currentOfPassengers+passengers>maxPassengers){
-            System.out.println("더이상 탑승할 수 없습니다.");
-            return false;
-        }
-        currentOfPassengers += passengers;
-        remainingPassengers = maxPassengers -currentOfPassengers;
-        return true;
-    }
-
+    abstract boolean takePassenger(int passengers);
+    abstract void alertStatus();
     //속도 변경
     public void changeSpeed(int speed) {
         this.speed += speed;
@@ -56,19 +48,27 @@ public class PublicTransport {
     //연료 확인
     public void checkFuel(){
         System.out.println("현재 주유량 = "+fuel);
+    }
+
+
+
+
+    public void alertFuel() {
+        System.out.println("주유량 = "+fuel);
+    }
+    public void alertCurrentOfPassengers() {
+        System.out.println("탑승 승객 수 = "+currentOfPassengers);
+    }
+
+    public void alertRemainingPassengers() {
+        System.out.println("잔여 승객 수 = "+remainingPassengers);
+    }
+
+    public void alertNeedFuel(){
         if(fuel<10) {
-            System.out.println("경고: 주유가 필요합니다.");
+            System.out.println("경고 : 주유가 필요합니다.");
         }
     }
-
-
-
-    public int getVehicleNumber() {
-        return vehicleNumber;
-    }
-
-
-
 }
 
 

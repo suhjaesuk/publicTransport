@@ -3,10 +3,19 @@ package PublicTransport;
 public class Bus extends PublicTransport {
 
     private int maxPassengers = 30;
-
     private int costs = 1000;
     private int checkCosts;
     private String status = "운행";
+
+
+
+
+    public void start() {
+        status="운행";
+    }
+    public void end(){
+        status="차고지행";
+    }
 
     //상태 변경
     public void changeStatus(){
@@ -20,6 +29,7 @@ public class Bus extends PublicTransport {
         }
     }
 
+
     @Override
     public void useFuel(int fuel) {
         super.useFuel(fuel);
@@ -27,8 +37,6 @@ public class Bus extends PublicTransport {
             status="차고지행";
         }
     }
-
-
 
     public boolean takePassenger(int passengers){
         if(currentOfPassengers+passengers>maxPassengers){
@@ -44,23 +52,13 @@ public class Bus extends PublicTransport {
         this.vehicleNumber=vehicleNumber;
     }
 
-
     public int getCheckCosts() {
         System.out.println("요금 확인 = "+checkCosts);
         return checkCosts;
     }
 
-    public String getStatus() {
+    @Override
+    public void alertStatus() {
         System.out.println("상태 = "+status);
-        return status;
-    }
-    public int getCurrentOfPassengers() {
-        System.out.println("탑승 승객 수 = "+currentOfPassengers);
-        return currentOfPassengers;
-    }
-
-    public int getRemainingPassengers() {
-        System.out.println("잔여 승객 수 = "+remainingPassengers);
-        return remainingPassengers;
     }
 }
