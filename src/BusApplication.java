@@ -1,10 +1,14 @@
 import PublicTransport.Bus;
-import PublicTransport.PublicTransport;
 
 public class BusApplication {
     public static void main(String[] args) {
-        Bus bus1 = new Bus(3000);
-        Bus bus2 = new Bus(3001);
+        Bus bus1 = new Bus();
+        Bus bus2 = new Bus();
+        //난수 생성
+        bus1.setVehicleNumber(bus1.makeRandom());
+        bus2.setVehicleNumber(bus2.makeRandom());
+        System.out.println("bus2.getVehicleNumber() = " + bus2.getVehicleNumber());
+        System.out.println("bus1.getVehicleNumber() = " + bus1.getVehicleNumber());
         bus1.checkNumber(bus1,bus2);
         bus1.takePassenger(2);
         bus1.alertCurrentOfPassengers();

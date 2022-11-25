@@ -2,7 +2,6 @@ package PublicTransport;
 
 public class Taxi extends PublicTransport{
     private String status = "일반";
-    private int maxPassengers = 4;
     private int defaultCosts=3000;
     private int  defaultDistance=1;
     private int distantPerCosts = 1000;
@@ -50,9 +49,9 @@ public class Taxi extends PublicTransport{
         }
     }
 
-    public Taxi(int vehicleNumber){
-    this.vehicleNumber=vehicleNumber;
-}
+    public Taxi (){
+        this.maxPassengers=4;
+    }
 
 
     public void alertDistant() {

@@ -1,8 +1,12 @@
 package PublicTransport;
 
+import java.util.ArrayList;
+
 public abstract class PublicTransport {
+    public static ArrayList<Integer> list = new ArrayList<Integer>();
     protected String status ="";
     protected int vehicleNumber;
+
     protected int fuel = 100;
     protected int speed = 0;
     protected int currentOfPassengers=0;
@@ -14,7 +18,7 @@ public abstract class PublicTransport {
     //운행 종료
     abstract void end();
     //승객 탑승
-    abstract boolean takePassenger(int passengers);
+    void takePassenger(){}; //오버라이드로 그냥 이용
     abstract void alertStatus();
     //속도 변경
     public void changeSpeed(int speed) {
@@ -68,6 +72,29 @@ public abstract class PublicTransport {
         if(fuel<10) {
             System.out.println("경고 : 주유가 필요합니다.");
         }
+    }
+
+    public int getVehicleNumber() {
+        return vehicleNumber;
+    }
+
+    public void setVehicleNumber(int vehicleNumber) {
+        this.vehicleNumber = vehicleNumber;
+    }
+
+    //랜덤번호 부여
+    public int makeRandom() {
+        int r;
+        while (true) {
+            boolean check = true;
+            r = (int) (Math.random() * 100) + 1;
+            if (list.contains(r)) check = false;
+            if (check) {
+                list.add(r);
+                break;
+            }
+        }
+        return r;
     }
 }
 
