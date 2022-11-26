@@ -59,11 +59,10 @@ public abstract class PublicTransport {
         }
     }
 
-    //연료 확인
+    //정보를 출력하는 함수 6개
     public void checkFuel() {
         System.out.println("현재 주유량 = " + fuel);
     }
-
 
     public void alertFuel() {
         System.out.println("주유량 = " + fuel);
@@ -81,15 +80,6 @@ public abstract class PublicTransport {
         if (fuel < 10) {
             System.out.println("경고 : 주유가 필요합니다.");
         }
-    }
-
-    //차량번호 필드 getter, setter -> 난수 생성 시 필요하다
-    public int getVehicleNumber() {
-        return vehicleNumber;
-    }
-
-    public void setVehicleNumber(int vehicleNumber) {
-        this.vehicleNumber = vehicleNumber;
     }
 
     public void distinguishLine() {
@@ -110,7 +100,13 @@ public abstract class PublicTransport {
         }
         return r;
     }
+
+    //차량번호 필드 setter -> 난수 생성 시 필요하다
+    public void setVehicleNumber(int vehicleNumber) {
+        this.vehicleNumber = vehicleNumber;
+    }
 }
+
 
 
 

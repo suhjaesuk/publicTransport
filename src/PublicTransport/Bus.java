@@ -57,8 +57,6 @@ public class Bus extends PublicTransport {
         System.out.println("상태 = " + status);
     }
 
-
-
     //output1~4() : 버스 어플리케이션 출력함수
     public void output1() {
         alertPassengers();
