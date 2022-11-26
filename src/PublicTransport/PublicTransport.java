@@ -4,22 +4,31 @@ import java.util.ArrayList;
 
 public abstract class PublicTransport {
     public static ArrayList<Integer> list = new ArrayList<Integer>();
-    protected String status ="";
+    protected String status = "";
     protected int vehicleNumber;
 
     protected int fuel = 100;
     protected int speed = 0;
-    protected int currentOfPassengers=0;
-    protected int maxPassengers; //필요한가 고민중.. 자식 클래스에 들어가지만 자식클래스에서 재정의를 해줘야한다. 이 클래스에서 안쓰인다.
+    protected int defaultCosts;
+
+    protected int checkAllCosts;
+    protected int currentOfPassengers = 0;
+    protected int maxPassengers;
     protected int remainingPassengers;
 
     //운행 시작
     abstract void start();
+
     //운행 종료
     abstract void end();
+
     //승객 탑승
-    void takePassenger(){}; //오버라이드로 그냥 이용
+    abstract boolean takePassenger(int passengers);
+
+    ; //오버라이드로 그냥 이용
+
     abstract void alertStatus();
+
     //속도 변경
     public void changeSpeed(int speed) {
         this.speed += speed;
@@ -37,43 +46,44 @@ public abstract class PublicTransport {
     }
 
     //연료 사용
-    public void useFuel(int fuel){
+    public void useFuel(int fuel) {
         this.fuel -= fuel;
-        }
+    }
 
     //연료 채우기
-    public void fillFuel(int fuel){
+    public void fillFuel(int fuel) {
         this.fuel += fuel;
-        if(this.fuel >100){
+        if (this.fuel > 100) {
             System.out.println("주유가 가득 찼습니다.");
-            this.fuel=100;
+            this.fuel = 100;
         }
     }
+
     //연료 확인
-    public void checkFuel(){
-        System.out.println("현재 주유량 = "+fuel);
+    public void checkFuel() {
+        System.out.println("현재 주유량 = " + fuel);
     }
-
-
 
 
     public void alertFuel() {
-        System.out.println("주유량 = "+fuel);
+        System.out.println("주유량 = " + fuel);
     }
-    public void alertCurrentOfPassengers() {
-        System.out.println("탑승 승객 수 = "+currentOfPassengers);
+
+    public void alertPassengers() {
+        System.out.println("탑승 승객 수 = " + currentOfPassengers + "\n" + "잔여 승객 수 = " + remainingPassengers);
     }
 
     public void alertRemainingPassengers() {
-        System.out.println("잔여 승객 수 = "+remainingPassengers);
+        System.out.println("잔여 승객 수 = " + remainingPassengers);
     }
 
-    public void alertNeedFuel(){
-        if(fuel<10) {
+    public void alertNeedFuel() {
+        if (fuel < 10) {
             System.out.println("경고 : 주유가 필요합니다.");
         }
     }
 
+    //차량번호 필드 getter, setter -> 난수 생성 시 필요하다
     public int getVehicleNumber() {
         return vehicleNumber;
     }
@@ -82,7 +92,11 @@ public abstract class PublicTransport {
         this.vehicleNumber = vehicleNumber;
     }
 
-    //랜덤번호 부여
+    public void distinguishLine() {
+        System.out.println("------------------------------");
+    }
+
+    //랜덤번호 부여 함수
     public int makeRandom() {
         int r;
         while (true) {
