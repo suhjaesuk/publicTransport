@@ -2,9 +2,10 @@ package PublicTransport;
 
 public class Taxi extends PublicTransport {
 
+    //기본거리?
     private int defaultDistance = 1;
     private int distantPerCosts = 1000;
-    private int checkCosts; //최종적으로 지불할 요금
+    private int checkCosts;
     private String destination;
     private int distant;
 
@@ -13,31 +14,31 @@ public class Taxi extends PublicTransport {
     @Override
     public void end() {status = "탑승불가";}
 
-    //승객 탑승 : 승객의 수 입력
+    //승객 탑승
     @Override
     public boolean takePassenger(int passengers) {
-        currentOfPassengers = 0;
-        if (passengers > maxPassengers) {
+        if (passengers > maxPassengerCount) {
             System.out.println("최대 승객 수 초과.");
             return false;
         }
         status = "운행중";
-        currentOfPassengers = passengers;
-        remainingPassengers = maxPassengers - passengers;
+        currentPassengerCount = passengers;
+        remainingPassengerCount = maxPassengerCount - passengers;
         return true;
     }
 
     //목적지로 이동. 목적지와 거리를 매개변수로 받는다.
-    public void toDestination(String destination, int distant) {
+    public void toDestination(String destination, int distantance) { //
         this.destination = destination;
-        this.distant = distant;
-        checkCosts = distantPerCosts * (distant - defaultDistance) + defaultCosts;
+        this.distant = distantance;
+        checkCosts = distantPerCosts * (distantance - defaultDistance) + defaultCost;
     }
 
     //최종 요금 결제
     public void pay() {
         status = "일반";
-        checkAllCosts += checkCosts;
+        accumulatedCost += checkCosts;
+        currentPassengerCount = 0;
     }
 
     @Override
@@ -49,8 +50,8 @@ public class Taxi extends PublicTransport {
     }
 
     public Taxi() {
-        this.maxPassengers = 4;
-        this.defaultCosts = 3000;
+        this.maxPassengerCount = 4;
+        this.defaultCost = 3000;
         this.status = "일반";
     }
 
@@ -65,7 +66,7 @@ public class Taxi extends PublicTransport {
     }
 
     public void alertDefaultCosts() {
-        System.out.println("기본 요금 확인 = " + defaultCosts);
+        System.out.println("기본 요금 확인 = " + defaultCost);
     }
 
     public void alertCheckCosts() {
@@ -73,7 +74,7 @@ public class Taxi extends PublicTransport {
     }
 
     public void alertCheckSumCosts() {
-        System.out.println("누적 요금 = " + checkAllCosts);
+        System.out.println("누적 요금 = " + accumulatedCost);
     }
     @Override
     public void alertStatus() {

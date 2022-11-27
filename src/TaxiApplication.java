@@ -6,9 +6,9 @@ public class TaxiApplication {
         Taxi taxi2 = new Taxi();
 
         //난수 생성 및 번호 확인
-        taxi1.setVehicleNumber(taxi1.makeRandom());
-        taxi2.setVehicleNumber(taxi2.makeRandom());
-        taxi1.checkNumber(taxi1, taxi2);
+        taxi1.setVehicleNumber(taxi1.makeUniqueRandomNumber());
+        taxi2.setVehicleNumber(taxi2.makeUniqueRandomNumber());
+        Taxi.checkNumber(taxi1, taxi2);
 
         //출력 -> 주유량, 상태
         taxi1.output1();

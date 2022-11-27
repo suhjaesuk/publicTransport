@@ -1,41 +1,42 @@
 package PublicTransport;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class PublicTransport {
-    public static ArrayList<Integer> list = new ArrayList<Integer>();
-    protected String status = "";
+    private static final List<Integer> list = new ArrayList<Integer>(); //final 이여야하는 이유 -> list 내부만 바뀐다.
+    protected String status; //기본생성자에 생성
     protected int vehicleNumber;
 
     protected int fuel = 100;
     protected int speed = 0;
-    protected int defaultCosts;
+    protected int defaultCost;
 
-    protected int checkAllCosts;
-    protected int currentOfPassengers = 0;
-    protected int maxPassengers;
-    protected int remainingPassengers;
+    protected int accumulatedCost; //checkAllCost안좋은 네이밍.
+
+    protected int currentPassengerCount = 0;
+
+    protected int maxPassengerCount;
+
+    protected int remainingPassengerCount;
 
     //운행 시작
     abstract void start();
-
     //운행 종료
     abstract void end();
 
     //승객 탑승
     abstract boolean takePassenger(int passengers);
 
-    ; //오버라이드로 그냥 이용
-
+    //상태를 출력하는 함수
     abstract void alertStatus();
 
-    //속도 변경
     public void changeSpeed(int speed) {
         this.speed += speed;
     }
 
-    //번호확인
-    public void checkNumber(PublicTransport p1, PublicTransport p2) {
+    //abstract 따로 구현
+    public static void checkNumber(PublicTransport p1, PublicTransport p2) {
         if (p1.vehicleNumber == 0 || p2.vehicleNumber == 0) {
             System.out.println("번호를 생성했는지 확인해주세요.");
         } else if (p1.vehicleNumber == p2.vehicleNumber) {
@@ -45,7 +46,7 @@ public abstract class PublicTransport {
         }
     }
 
-    //연료 사용
+    //연료 사용 제약조건 추가할것 int>0
     public void useFuel(int fuel) {
         this.fuel -= fuel;
     }
@@ -69,11 +70,11 @@ public abstract class PublicTransport {
     }
 
     public void alertPassengers() {
-        System.out.println("탑승 승객 수 = " + currentOfPassengers + "\n" + "잔여 승객 수 = " + remainingPassengers);
+        System.out.println("탑승 승객 수 = " + currentPassengerCount + "\n" + "잔여 승객 수 = " + remainingPassengerCount);
     }
 
     public void alertRemainingPassengers() {
-        System.out.println("잔여 승객 수 = " + remainingPassengers);
+        System.out.println("잔여 승객 수 = " + remainingPassengerCount);
     }
 
     public void alertNeedFuel() {
@@ -86,10 +87,10 @@ public abstract class PublicTransport {
         System.out.println("------------------------------");
     }
 
-    //랜덤번호 부여 함수
-    public int makeRandom() {
-        int r;
-        while (true) {
+    //늘 새로운 난수를 생성하는 함수
+    public int makeUniqueRandomNumber() {
+        int r;         //hashmap 사용.
+        while (true) { //while(true)는 무거운 코드. 쓰지 말것. 차라리 for를 10000번 돌릴것.
             boolean check = true;
             r = (int) (Math.random() * 100) + 1;
             if (list.contains(r)) check = false;
@@ -101,7 +102,7 @@ public abstract class PublicTransport {
         return r;
     }
 
-    //차량번호 필드 setter -> 난수 생성 시 필요하다
+    //차량번호 필드 setter -> 난수 생성 시 필요
     public void setVehicleNumber(int vehicleNumber) {
         this.vehicleNumber = vehicleNumber;
     }
