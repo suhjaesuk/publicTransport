@@ -1,3 +1,4 @@
+import Feature.UniqueRandomNumberMaker;
 import PublicTransport.Bus;
 
 public class BusApplication {
@@ -5,10 +6,10 @@ public class BusApplication {
         Bus bus1 = new Bus();
         Bus bus2 = new Bus();
 
-        //랜덤클래스 생성. 스태틱 함수로 만들기.
+        //랜덤클래스 생성.
         //난수 생성 및 번호 확인
-        bus1.setVehicleNumber(bus1.makeUniqueRandomNumber());
-        bus2.setVehicleNumber(bus2.makeUniqueRandomNumber());
+        bus1.setVehicleNumber(UniqueRandomNumberMaker.makeUniqueRandomNumber());
+        bus2.setVehicleNumber(UniqueRandomNumberMaker.makeUniqueRandomNumber());
         Bus.checkNumber(bus1,bus2);
 
         bus1.takePassenger(2);

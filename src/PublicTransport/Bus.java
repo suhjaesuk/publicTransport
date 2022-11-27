@@ -1,7 +1,6 @@
 package PublicTransport;
 
 public class Bus extends PublicTransport{
-
     @Override               //상태값은 Enum으로 관리 상태가 가변적이면 String으로 사용
     public void start() {
         this.status = "운행";
@@ -11,36 +10,37 @@ public class Bus extends PublicTransport{
 
     //상태 변경
     public void changeStatus() {
-        if (status.equals("운행")) {
-            status = "차고지행";
-            remainingPassengerCount = 0;
-            accumulatedCost = 0;
-            currentPassengerCount = 0;
+        if (this.status.equals("운행")) {
+            this.status = "차고지행";
+            this.remainingPassengerCount = 0;
+            this.accumulatedCost = 0;
+            this.currentPassengerCount = 0;
         } else {
-            status = "운행";
+            this.status = "운행";
         }
     }
     @Override
     public void useFuel(int fuel) {
         super.useFuel(fuel);
         if (this.fuel < 10) {
-            status = "차고지행";
+            this.status = "차고지행";
         }
     }
     //승객 탑승
     @Override
     public boolean takePassenger(int passengers) {
-        if (currentPassengerCount + passengers > maxPassengerCount) {
+        if (this.currentPassengerCount + passengers > this.maxPassengerCount) {
             System.out.println("최대 승객 수 초과.");
             return false;
         }
-        currentPassengerCount += passengers;
-        remainingPassengerCount = maxPassengerCount - currentPassengerCount;
-        accumulatedCost = defaultCost * passengers + accumulatedCost;
+        this.currentPassengerCount += passengers;
+        this.remainingPassengerCount = this.maxPassengerCount - this.currentPassengerCount;
+        this.accumulatedCost = this.defaultCost * passengers + this.accumulatedCost;
         return true;
     }
 
     public Bus() {
+//        this.status= String.valueOf(Status.운행);
         this.maxPassengerCount = 30;
         this.status = "운행";
         this.defaultCost = 1000;
@@ -48,12 +48,12 @@ public class Bus extends PublicTransport{
 
     //정보를 출력하는 함수 2개
     public void getCheckCosts() {
-        System.out.println("요금 확인 = " + accumulatedCost);
+        System.out.println("요금 확인 = " + this.accumulatedCost);
     }
 
     @Override
     public void alertStatus() {
-        System.out.println("상태 = " + status);
+        System.out.println("상태 = " + this.status);
     }
 
 

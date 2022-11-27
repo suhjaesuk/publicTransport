@@ -1,3 +1,4 @@
+import Feature.UniqueRandomNumberMaker;
 import PublicTransport.Taxi;
 
 public class TaxiApplication {
@@ -6,8 +7,8 @@ public class TaxiApplication {
         Taxi taxi2 = new Taxi();
 
         //난수 생성 및 번호 확인
-        taxi1.setVehicleNumber(taxi1.makeUniqueRandomNumber());
-        taxi2.setVehicleNumber(taxi2.makeUniqueRandomNumber());
+        taxi1.setVehicleNumber(UniqueRandomNumberMaker.makeUniqueRandomNumber());
+        taxi2.setVehicleNumber(UniqueRandomNumberMaker.makeUniqueRandomNumber());
         Taxi.checkNumber(taxi1, taxi2);
 
         //출력 -> 주유량, 상태

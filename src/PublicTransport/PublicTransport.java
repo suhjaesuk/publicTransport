@@ -1,10 +1,5 @@
 package PublicTransport;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public abstract class PublicTransport {
-    private static final List<Integer> list = new ArrayList<Integer>(); //final 이여야하는 이유 -> list 내부만 바뀐다.
     protected String status; //기본생성자에 생성
     protected int vehicleNumber;
 
@@ -62,23 +57,23 @@ public abstract class PublicTransport {
 
     //정보를 출력하는 함수 6개
     public void checkFuel() {
-        System.out.println("현재 주유량 = " + fuel);
+        System.out.println("현재 주유량 = " + this.fuel);
     }
 
     public void alertFuel() {
-        System.out.println("주유량 = " + fuel);
+        System.out.println("주유량 = " + this.fuel);
     }
 
     public void alertPassengers() {
-        System.out.println("탑승 승객 수 = " + currentPassengerCount + "\n" + "잔여 승객 수 = " + remainingPassengerCount);
+        System.out.println("탑승 승객 수 = " + this.currentPassengerCount + "\n" + "잔여 승객 수 = " + this.remainingPassengerCount);
     }
 
     public void alertRemainingPassengers() {
-        System.out.println("잔여 승객 수 = " + remainingPassengerCount);
+        System.out.println("잔여 승객 수 = " + this.remainingPassengerCount);
     }
 
     public void alertNeedFuel() {
-        if (fuel < 10) {
+        if (this.fuel < 10) {
             System.out.println("경고 : 주유가 필요합니다.");
         }
     }
@@ -87,25 +82,11 @@ public abstract class PublicTransport {
         System.out.println("------------------------------");
     }
 
-    //늘 새로운 난수를 생성하는 함수
-    public int makeUniqueRandomNumber() {
-        int r;         //hashmap 사용.
-        while (true) { //while(true)는 무거운 코드. 쓰지 말것. 차라리 for를 10000번 돌릴것.
-            boolean check = true;
-            r = (int) (Math.random() * 100) + 1;
-            if (list.contains(r)) check = false;
-            if (check) {
-                list.add(r);
-                break;
-            }
-        }
-        return r;
-    }
-
     //차량번호 필드 setter -> 난수 생성 시 필요
     public void setVehicleNumber(int vehicleNumber) {
         this.vehicleNumber = vehicleNumber;
     }
+    public int getVehicleNumber() { return this.vehicleNumber; }
 }
 
 
